@@ -28,14 +28,20 @@ class HeroCard(GlassCard):
         lay.addStretch(1)
         
         t_lbl = QLabel(title.upper())
-        t_lbl.setStyleSheet(f"font-family:'{FONT_TITLE}'; font-size:32px; font-weight:900; color:{color};")
+        t_lbl.setObjectName("HeroTitle")
+        # Ensure high contrast in light mode by using the accent color only if it's dark enough, or keep it.
+        t_lbl.setStyleSheet(f"font-size: 32px; font-weight: 900; color: {color};")
+        
         s_lbl = QLabel(subtitle)
-        s_lbl.setStyleSheet(f"font-family:'{FONT_BODY}'; font-size:16px; color:#ffffffBB;")
+        s_lbl.setObjectName("HeroSubtitle")
+        # Fixed: subtitle color now adapts via theme.py object name
         lay.addWidget(t_lbl)
         lay.addWidget(s_lbl)
         lay.addSpacing(20)
         
         self.play_btn = NeonButton("PLAY NOW", primary=True); self.play_btn.setFixedSize(140, 46)
+        # Force high visibility in light mode
+        self.play_btn.setObjectName("PrimaryButton")
         self.play_btn.clicked.connect(lambda: self.clicked.emit(self.key))
         lay.addWidget(self.play_btn)
 
@@ -45,11 +51,14 @@ class HeroCard(GlassCard):
 
     def paintEvent(self, e):
         super().paintEvent(e)
+        from hub.core.theme import is_dark
         # Background: Add subtle editorial gradient
         p = QPainter(self); p.setRenderHint(QPainter.RenderHint.Antialiasing)
-        p.setOpacity(0.1)
+        p.setOpacity(0.15 if is_dark() else 0.05)
         grad = QLinearGradient(0, 0, self.width(), self.height())
-        grad.setColorAt(0, Qt.GlobalColor.white); grad.setColorAt(1, Qt.GlobalColor.transparent)
+        # Use white in dark mode, black in light mode for subtle tonal depth
+        color = Qt.GlobalColor.white if is_dark() else Qt.GlobalColor.black
+        grad.setColorAt(0, color); grad.setColorAt(1, Qt.GlobalColor.transparent)
         p.setBrush(grad); p.setPen(Qt.PenStyle.NoPen)
         p.drawRoundedRect(self.rect(), 32, 32)
 
@@ -64,7 +73,8 @@ class DiscoveryScreen(QWidget):
         
         hdr = QVBoxLayout(); hdr.setSpacing(4)
         title = QLabel("ARCADE DISCOVERY")
-        title.setStyleSheet(f"font-family:'{FONT_TITLE}'; font-size:42px; font-weight:900; color:{PALETTE['primary']};")
+        title.setObjectName("TitleLabel")
+        # Removed in-line style for theme reactivity
         sub = QLabel("Explore curated experiences and epic challenges.")
         sub.setObjectName("MutedLabel")
         hdr.addWidget(title); hdr.addWidget(sub)

@@ -57,27 +57,27 @@ LIGHT = {
     "surface_highest":"#d9ddec",
     "surface_bright":"#ffffff",
 
-    "text":         "#172b54",
-    "on_surface":   "#172b54",
-    "text_sec":     "#4d556b",
-    "muted":        "#9baad6",
+    "text":         "#060e20",
+    "on_surface":   "#060e20",
+    "text_sec":     "#3c4a6e",
+    "muted":        "#717e9e",
 
-    "primary":      "#006e36",
-    "primary_con":  "#c4ffcd",
-    "primary_dim":  "#005228",
+    "primary":      "#005a2e",
+    "primary_con":  "#a7ffb4",
+    "primary_dim":  "#003d1f",
 
-    "secondary":      "#28329c",
-    "secondary_con":  "#e0e0ff",
+    "secondary":      "#1a227e",
+    "secondary_con":  "#d1d1ff",
     
-    "tertiary":       "#6c3e00",
+    "tertiary":       "#512e00",
     "tertiary_con":   "#ffcb97",
 
     "error":          "#8a1632",
     "error_con":      "#fd6f85",
 
-    "border":       "rgba(101, 117, 158, 0.15)",
-    "outline":      "#65759e",
-    "shadow":       "rgba(0, 0, 0, 0.12)",
+    "border":       "rgba(6, 14, 32, 0.12)",
+    "outline":      "#3c4a6e",
+    "shadow":       "rgba(0, 0, 0, 0.15)",
     "overlay":      "rgba(250, 248, 255, 0.85)",
 }
 
@@ -159,7 +159,7 @@ def app_stylesheet() -> str:
         font-family: {FONT_TITLE};
         font-size: 32px;
         font-weight: 800;
-        color: {p["text"]};
+        color: {p["primary"]};
         letter-spacing: -0.02em;
     }}
     QLabel#SectionLabel {{
@@ -179,6 +179,17 @@ def app_stylesheet() -> str:
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.1em;
+    }}
+    QLabel#HeroTitle {{
+        font-family: {FONT_TITLE};
+        font-size: 42px;
+        font-weight: 900;
+        color: {p["primary"]};
+    }}
+    QLabel#HeroSubtitle {{
+        font-family: {FONT_BODY};
+        font-size: 16px;
+        color: {p["text_sec"]};
     }}
 
     /* ── Cards — No 1px borders, use tonal layering ── */

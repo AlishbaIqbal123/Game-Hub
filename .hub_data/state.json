@@ -21,7 +21,11 @@
   },
   "lifetime_stats": {
     "moves": 0,
-    "games_played": 30,
+    "games_played": 45,
     "wins": 0
+  },
+  "tutorials_seen": {
+    "spider_solitaire": true,
+    "hangman": true
   }
 }
