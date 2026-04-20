@@ -138,14 +138,14 @@ class Puzzle2048Screen(BaseGameScreen):
             self._game_ended = True
             self.sounds.play("success")
             self.show_game_over("🏆", "You reached 2048!", self.score_value,
-                                "Amazing! Keep going for an even higher score!")
+                                message="Amazing! Keep going for an even higher score!")
             return
         # Lose — no moves left
         if not self._has_moves():
             self._game_ended = True
             self.sounds.play("lose")
-            self.show_game_over("😢", "No More Moves!", self.score_value,
-                                "The board is full. Try again!")
+            self.show_game_over("💀", "No More Moves!", self.score_value,
+                                message="The board is full. Try again!")
 
     def _has_moves(self) -> bool:
         for r in range(4):

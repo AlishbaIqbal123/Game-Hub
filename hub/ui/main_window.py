@@ -1,5 +1,6 @@
 from __future__ import annotations
 from pathlib import Path
+from PyQt6.QtCore import Qt, pyqtSignal, QTimer
 from PyQt6.QtWidgets import QMainWindow, QHBoxLayout, QWidget
 from hub.core.sound import SoundManager
 from hub.core.storage import StorageManager

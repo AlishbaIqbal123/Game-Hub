@@ -153,11 +153,11 @@ class Connect4Screen(BaseGameScreen):
             self.set_score(100)
             self._refresh()
             self.show_game_over("🏆", f"{NAMES[winner]} Wins!", 100,
-                                "Great game! Play again?")
+                                message="Great game! Play again?")
             return
         if all(self.board[0][c] != EMPTY for c in range(COLS)):
             self.game_over = True
-            self.show_game_over("🤝", "It's a Draw!", 0, "The board is full!")
+            self.show_game_over("🤝", "It's a Draw!", 0, message="The board is full!")
             return
         self.current = P2 if self.current == P1 else P1
         self._refresh()

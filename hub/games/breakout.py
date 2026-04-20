@@ -176,7 +176,7 @@ class BreakoutScreen(BaseGameScreen):
             self.lives -= 1; self.sounds.play("lose")
             if self.lives <= 0:
                 self.running = False; self.game_over = True; self.timer.stop()
-                self.show_game_over("💔","Game Over!",self.score,"All lives lost!")
+                self.show_game_over("💔", "Game Over!", self.score, message="All lives lost!")
             else:
                 self._reset_ball(); self.running = False; self.timer.stop()
                 self.start_btn.setText("▶ Launch")
@@ -184,6 +184,6 @@ class BreakoutScreen(BaseGameScreen):
         # Win
         if all(not self.bricks[r][c] for r in range(BRICK_ROWS) for c in range(BRICK_COLS)):
             self.running = False; self.timer.stop()
-            self.show_game_over("🏆","All Bricks Cleared!",self.score,"Amazing!")
+            self.show_game_over("🏆", "All Bricks Cleared!", self.score, message="Amazing!")
 
         self.canvas.update()

@@ -123,7 +123,7 @@ class ReactionTimeScreen(BaseGameScreen):
             if len(self.results) >= ROUNDS:
                 self.state = 'done'
                 self.show_game_over("⚡", f"Average: {avg} ms", score,
-                                    self._rating(avg))
+                                    message=self._rating(avg))
             self.canvas.update()
         elif self.state in ('result', 'early'):
             self._begin_round()

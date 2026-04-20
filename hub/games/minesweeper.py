@@ -149,7 +149,7 @@ class MinesweeperScreen(BaseGameScreen):
                     if self.grid[r][c]==-1 and self.state[r][c]=='H':
                         self.state[r][c]='R'
             self._refresh()
-            self.show_game_over("💥","Boom! You hit a mine!",0,"Try again — use the numbers!")
+            self.show_game_over("💥", "Boom! You hit a mine!", 0, message="Try again — use the numbers!")
             return
         self._flood(row, col)
         self.sounds.play("move")
@@ -157,7 +157,7 @@ class MinesweeperScreen(BaseGameScreen):
         if self._revealed >= safe:
             score = 500
             self.set_score(score)
-            self.show_game_over("🏆","You cleared the board!",score,"All mines avoided!")
+            self.show_game_over("🏆", "You cleared the board!", score, message="All mines avoided!")
         else:
             self.set_score(self._revealed * 2)
         self._refresh()

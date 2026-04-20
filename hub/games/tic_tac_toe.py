@@ -122,7 +122,7 @@ class TicTacToeScreen(BaseGameScreen):
             button.setEnabled(False)
         emoji = "🎉" if "X wins" in message else ("😅" if "O wins" in message else "🤝")
         self.show_game_over(emoji, message, self.running_score,
-                            "Press Play Again for a new round!")
+                            message="Press Play Again for a new round!")
 
     def _check_draw(self) -> bool:
         if "" not in self.board and not self.check_winner(self.board):
@@ -131,7 +131,7 @@ class TicTacToeScreen(BaseGameScreen):
             for button in self.buttons:
                 button.setEnabled(False)
             self.show_game_over("🤝", "It's a Draw!", self.running_score,
-                                "So close! Try again for the win.")
+                                message="So close! Try again for the win.")
             return True
         return False
 

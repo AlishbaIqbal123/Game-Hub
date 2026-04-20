@@ -138,9 +138,10 @@ class BaseGameScreen(QWidget):
         self._tutorial.show()
         self._tutorial.raise_()
 
-    def show_game_over(self, emoji: str, title: str, score: int, message: str = "") -> None:
+    def show_game_over(self, emoji: str, title: str, score: int, best: int = 0, message: str = "") -> None:
         """Show the game-over overlay with score summary."""
-        best = self.storage.high_score(self.game_key)
+        if best == 0:
+            best = self.storage.high_score(self.game_key)
         self._game_over_overlay.show_result(emoji, title, score, best, message)
 
     def resizeEvent(self, event) -> None:  # noqa: N802
