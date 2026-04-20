@@ -35,9 +35,13 @@ class HeroCard(GlassCard):
         lay.addWidget(s_lbl)
         lay.addSpacing(20)
         
-        play = NeonButton("PLAY NOW", primary=True); play.setFixedSize(140, 46)
-        play.clicked.connect(lambda: self.clicked.emit(self.key))
-        lay.addWidget(play)
+        self.play_btn = NeonButton("PLAY NOW", primary=True); self.play_btn.setFixedSize(140, 46)
+        self.play_btn.clicked.connect(lambda: self.clicked.emit(self.key))
+        lay.addWidget(self.play_btn)
+
+    def mousePressEvent(self, e):
+        # Allow clicking the entire card to launch the game
+        self.clicked.emit(self.key)
 
     def paintEvent(self, e):
         super().paintEvent(e)

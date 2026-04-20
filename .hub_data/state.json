@@ -19,8 +19,9 @@
     "reaction_time": 639,
     "hangman": 85
   },
-  "tutorials_seen": {
-    "solitaire": true,
-    "spider_solitaire": true
+  "lifetime_stats": {
+    "moves": 0,
+    "games_played": 30,
+    "wins": 0
   }
 }
