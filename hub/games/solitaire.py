@@ -132,6 +132,10 @@ class SolitaireScreen(BaseGameScreen):
         sub_hdr = QHBoxLayout(); sub_hdr.setContentsMargins(10, 0, 10, 0)
         self._stats = QLabel("SCORE: 0  |  MOVES: 0"); self._stats.setStyleSheet(f"font-family:'{FONT_TITLE}'; font-size:18px; font-weight:800; color:{PALETTE['primary']};")
         sub_hdr.addWidget(self._stats); sub_hdr.addStretch(1)
+        self.undo_btn = NeonButton("UNDO", accent=PALETTE['secondary']); self.undo_btn.setFixedSize(80, 40)
+        self.undo_btn.clicked.connect(self.undo)
+        sub_hdr.addWidget(self.undo_btn)
+        
         reset = NeonButton("RESTART"); reset.setFixedSize(100, 40); reset.clicked.connect(self.reset_game)
         sub_hdr.addWidget(reset)
         self.content_layout.addLayout(sub_hdr)
@@ -151,7 +155,38 @@ class SolitaireScreen(BaseGameScreen):
             for j in range(i+1):
                 c = d.pop(); c.face_up = (j == i); self.tableau[i].append(c)
         self.foundations = [[] for _ in range(4)]; self.stock = d; self.waste = []
+        self._history = []
         self._moves = 0; self._refresh()
+
+    def _save_state(self):
+        import copy
+        state = {
+            "stock": copy.deepcopy(self.stock),
+            "waste": copy.deepcopy(self.waste),
+            "foundations": copy.deepcopy(self.foundations),
+            "tableau": copy.deepcopy(self.tableau),
+            "moves": self._moves
+        }
+        self._history.append(state)
+        if len(self._history) > 50: self._history.pop(0)
+
+    def undo(self):
+        if not self._history: return
+        state = self._history.pop()
+        self.stock = state["stock"]
+        self.waste = state["waste"]
+        self.foundations = state["foundations"]
+        self.tableau = state["tableau"]
+        self._moves = state["moves"]
+        self.sounds.play("click")
+        self._refresh()
+
+    def keyPressEvent(self, e):
+        from PyQt6.QtCore import Qt
+        if e.key() == Qt.Key.Key_Z and e.modifiers() == Qt.KeyboardModifier.ControlModifier:
+            self.undo()
+        else:
+            super().keyPressEvent(e)
 
     def _refresh(self):
         self._stats.setText(f"SCORE: {self._calc_score()}  |  MOVES: {self._moves}")
@@ -161,6 +196,7 @@ class SolitaireScreen(BaseGameScreen):
         return sum(len(f) for f in self.foundations) * 100 - self._moves
 
     def draw_stock(self):
+        self._save_state()
         if not self.stock: self.stock = self.waste[::-1]; self.waste = []
         else: self.waste.append(self.stock.pop()); self.waste[-1].face_up = True
         self._moves += 1; self.sounds.play("click"); self._refresh()
@@ -183,6 +219,7 @@ class SolitaireScreen(BaseGameScreen):
             else: valid = (src[0].is_red != t[-1].is_red and src[0].rank == t[-1].rank - 1)
 
         if valid:
+            self._save_state()
             if s_type == "waste": self.waste.pop()
             elif s_type == "foundation": self.foundations[s_col].pop()
             elif s_type == "tableau":

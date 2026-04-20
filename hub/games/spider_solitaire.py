@@ -94,6 +94,13 @@ class SpiderBoard(QWidget):
     def mousePressEvent(self, e):
         if e.button() != Qt.MouseButton.LeftButton: return
         mx, my = e.position().x(), e.position().y()
+        
+        # Check Deck Hit (Bottom Right)
+        stock_x, stock_y = self.width() - 110, self.height() - 140
+        if QRectF(stock_x - 40, stock_y - 20, CARD_W + 40, CARD_H + 20).contains(mx, my):
+            self.screen.deal_stock()
+            return
+
         col, idx = self._hit(mx, my)
         if col < 0: return
         if not self.screen.tableau[col][idx].face_up: return
@@ -138,7 +145,20 @@ class SpiderBoard(QWidget):
         for i in range(0, self.width(), 6): p.drawLine(i, 0, i, self.height())
         for i in range(0, self.height(), 6): p.drawLine(0, i, self.width(), i)
 
-        # Draw Stock Indicator
+        # Draw Foundations (Completed Sequences) at Bottom Left
+        found_x, found_y = 30, self.height() - 140
+        for i in range(8):
+            fx = found_x + i * 18
+            if i < self.screen.completed:
+                # Show representing King for completed sequence
+                draw_card(p, Card(SUIT, "K"), fx, found_y)
+            else:
+                # Ghostly slot for remaining sequences
+                p.setOpacity(0.2)
+                draw_card(p, None, fx, found_y)
+                p.setOpacity(1.0)
+
+        # Draw Stock Indicator (Bottom Right)
         stock_x, stock_y = self.width() - 110, self.height() - 140
         for i in range(len(self.screen.stock_piles)):
             draw_card(p, Card(SUIT, "K", face_up=False), stock_x - i*3, stock_y - i*3)
@@ -193,11 +213,16 @@ class SpiderScreen(BaseGameScreen):
         deal_btn.clicked.connect(self.deal_stock)
         sub_hdr.addWidget(deal_btn)
         
+        self.undo_btn = NeonButton("UNDO", accent=PALETTE['secondary']); self.undo_btn.setFixedSize(80, 40)
+        self.undo_btn.clicked.connect(self.undo)
+        sub_hdr.addWidget(self.undo_btn)
+
         reset_btn = NeonButton("RESTART"); reset_btn.setFixedSize(100, 40)
         reset_btn.clicked.connect(self.reset_game)
         sub_hdr.addWidget(reset_btn)
         self.content_layout.addLayout(sub_hdr)
 
+        self._history = []
         self.board = SpiderBoard(self)
         self.content_layout.addWidget(self.board, 1)
         self.reset_game()
@@ -219,7 +244,36 @@ class SpiderScreen(BaseGameScreen):
                 c = d.pop(); c.face_up = False; self.tableau[col].append(c)
             self.tableau[col][-1].face_up = True
         self.stock_piles = [d[i*10:(i+1)*10] for i in range(5)]
+        self._history = []
         self.set_score(0); self._refresh()
+
+    def _save_state(self):
+        import copy
+        state = {
+            "tableau": copy.deepcopy(self.tableau),
+            "stock": copy.deepcopy(self.stock_piles),
+            "completed": self.completed,
+            "moves": self._moves
+        }
+        self._history.append(state)
+        if len(self._history) > 50: self._history.pop(0)
+
+    def undo(self):
+        if not self._history or self.board._anim_cards: return
+        state = self._history.pop()
+        self.tableau = state["tableau"]
+        self.stock_piles = state["stock"]
+        self.completed = state["completed"]
+        self._moves    = state["moves"]
+        self.sounds.play("click")
+        self._refresh()
+
+    def keyPressEvent(self, e):
+        from PyQt6.QtCore import Qt
+        if e.key() == Qt.Key.Key_Z and e.modifiers() == Qt.KeyboardModifier.ControlModifier:
+            self.undo()
+        else:
+            super().keyPressEvent(e)
 
     def _refresh(self):
         s = max(0, self.completed * 500 - self._moves * 2)
@@ -228,6 +282,7 @@ class SpiderScreen(BaseGameScreen):
         self.board.update()
 
     def move_cards(self, src_col, src_idx, dst_col):
+        self._save_state()
         src, dst = self.tableau[src_col], self.tableau[dst_col]
         moving = src[src_idx:]
         if dst and (not dst[-1].face_up or dst[-1].rank != moving[0].rank + 1): return
@@ -241,7 +296,16 @@ class SpiderScreen(BaseGameScreen):
         cards = self.tableau[col]
         if len(cards) < 13: return
         tail = cards[-13:]
-        if tail[0].value != "K" or not self.board._is_seq(tail): return
+        if tail[0].rank != 12 or not self.board._is_seq(tail): return # rank 12 is King
+        
+        # Animate flight to bottom left foundation
+        origin = QPointF(self.board._col_x(col), self.board._card_y(col, len(cards)-13))
+        target = QPointF(30 + self.completed * 18, self.board.height() - 140)
+        self.board._anim_cards.append({
+            'origin': origin, 'current': origin, 'target': target,
+            'card': tail[0], 'col': -1, 'start_time': time.time()
+        })
+
         del self.tableau[col][-13:]
         if self.tableau[col]: self.tableau[col][-1].face_up = True
         self.completed += 1; self.sounds.play("success")
@@ -249,7 +313,12 @@ class SpiderScreen(BaseGameScreen):
         self._refresh()
 
     def deal_stock(self):
+        # Force clear if something is stuck
+        if self.board._anim_cards and len(self.board._anim_cards) > 20: 
+            self.board._anim_cards = []
+            
         if not self.stock_piles or self.board._anim_cards: return
+        self._save_state()
         pile = self.stock_piles.pop(0)
         origin = QPointF(self.board.width() - 110, self.board.height() - 140)
         t_base = time.time()
@@ -257,6 +326,6 @@ class SpiderScreen(BaseGameScreen):
             target = QPointF(self.board._col_x(col), self.board._card_y(col, len(self.tableau[col])))
             self.board._anim_cards.append({
                 'origin': origin, 'current': origin, 'target': target,
-                'card': c, 'col': col, 'start_time': t_base + col*0.08
+                'card': c, 'col': col, 'start_time': t_base + col*0.06
             })
         self._moves += 1; self.sounds.play("click"); self._refresh()
