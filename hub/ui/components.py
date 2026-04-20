@@ -216,14 +216,14 @@ class NeonButton(QPushButton):
         
         if accent:
             self.setStyleSheet(f"""
-                QPushButton { {
+                QPushButton {{
                     border: 1px solid {accent}55;
                     color: {accent};
-                } }
-                QPushButton:hover { {
+                }}
+                QPushButton:hover {{
                     background: {accent}22;
                     border: 1px solid {accent};
-                } }
+                }}
             """)
         self.setCursor(Qt.CursorShape.PointingHandCursor)
 
