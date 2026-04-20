@@ -234,6 +234,7 @@ def app_stylesheet() -> str:
         color: {p["bg"]};
         border-radius: 20px;
         padding: 12px 24px;
+        font-weight: 900;
     }}
     QPushButton#PrimaryButton:hover {{
         background: {p["primary_con"]};
@@ -250,11 +251,11 @@ def app_stylesheet() -> str:
 
     QPushButton#GhostButton {{
         background: transparent;
-        color: {p["text_sec"]};
+        color: {p["text"]};
     }}
     QPushButton#GhostButton:hover {{
         background: {p["surface_highest"]};
-        color: {p["text"]};
+        color: {p["primary"]};
     }}
 
     /* ── Sidebar nav buttons ── */
@@ -263,8 +264,8 @@ def app_stylesheet() -> str:
         border-radius: 16px;
         padding: 14px 20px;
         background: transparent;
-        color: {p["text_sec"]};
-        font-weight: 600;
+        color: {p["text"]};
+        font-weight: 700;
     }}
     QPushButton#SidebarButton:hover {{
         background: {p["surface_mid"]};

@@ -29,8 +29,10 @@ class HeroCard(GlassCard):
         
         t_lbl = QLabel(title.upper())
         t_lbl.setObjectName("HeroTitle")
-        # Ensure high contrast in light mode by using the accent color only if it's dark enough, or keep it.
-        t_lbl.setStyleSheet(f"font-size: 32px; font-weight: 900; color: {color};")
+        # Ensure high contrast in light mode by deepening the color
+        from hub.core.theme import is_dark
+        display_color = color if is_dark() else QColor(color).darker(150).name()
+        t_lbl.setStyleSheet(f"font-size: 32px; font-weight: 900; color: {display_color};")
         
         s_lbl = QLabel(subtitle)
         s_lbl.setObjectName("HeroSubtitle")
