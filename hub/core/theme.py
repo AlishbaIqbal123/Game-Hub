@@ -39,6 +39,8 @@ DARK = {
     
     "error":          "#fd6f85",
     "error_con":      "#8a1632",
+    "success":        "#22d98a",
+    "warning":        "#ffd60a",
 
     # Structural
     "border":       "rgba(101, 117, 158, 0.15)", # Ghost border fallback
@@ -74,6 +76,8 @@ LIGHT = {
 
     "error":          "#8a1632",
     "error_con":      "#fd6f85",
+    "success":        "#006e36",
+    "warning":        "#a25600",
 
     "border":       "rgba(6, 14, 32, 0.12)",
     "outline":      "#3c4a6e",
