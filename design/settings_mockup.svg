@@ -1,0 +1,25 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1440" height="900" fill="#07111F"/>
+  <rect x="80" y="70" width="1280" height="760" rx="40" fill="#12233F" fill-opacity="0.86" stroke="rgba(255,255,255,0.12)"/>
+  <text x="136" y="144" fill="#F5F8FF" font-size="42" font-family="Bahnschrift" font-weight="700">Settings</text>
+  <text x="136" y="186" fill="#9AB0D5" font-size="18" font-family="Segoe UI">Audio, animations, layout comfort, and brand typography.</text>
+  <rect x="136" y="244" width="1168" height="500" rx="32" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.10)"/>
+  <text x="176" y="312" fill="#F5F8FF" font-size="24" font-family="Bahnschrift">Preferences</text>
+  <rect x="176" y="352" width="48" height="28" rx="14" fill="#28F2FF"/>
+  <circle cx="210" cy="366" r="10" fill="#07111F"/>
+  <text x="244" y="372" fill="#F5F8FF" font-size="18" font-family="Segoe UI">Enable sound effects</text>
+  <rect x="176" y="414" width="48" height="28" rx="14" fill="#28F2FF"/>
+  <circle cx="210" cy="428" r="10" fill="#07111F"/>
+  <text x="244" y="434" fill="#F5F8FF" font-size="18" font-family="Segoe UI">Enable animations</text>
+  <text x="176" y="506" fill="#F5F8FF" font-size="24" font-family="Bahnschrift">Volume</text>
+  <rect x="176" y="532" width="420" height="12" rx="6" fill="rgba(255,255,255,0.10)"/>
+  <rect x="176" y="532" width="272" height="12" rx="6" fill="#28F2FF"/>
+  <circle cx="448" cy="538" r="16" fill="#28F2FF"/>
+  <text x="620" y="544" fill="#9AB0D5" font-size="16" font-family="Segoe UI">65%</text>
+  <text x="176" y="622" fill="#F5F8FF" font-size="24" font-family="Bahnschrift">Font Suggestions</text>
+  <text x="176" y="660" fill="#9AB0D5" font-size="18" font-family="Segoe UI">Orbitron · Rajdhani · Inter · Segoe UI</text>
+  <rect x="176" y="720" width="180" height="56" rx="20" fill="#28F2FF"/>
+  <text x="240" y="756" fill="#07111F" font-size="18" font-family="Segoe UI" font-weight="700">Save</text>
+  <rect x="374" y="720" width="180" height="56" rx="20" fill="#1B2B48" stroke="#4C8DFF"/>
+  <text x="426" y="756" fill="#F5F8FF" font-size="18" font-family="Segoe UI">Back Home</text>
+</svg>

@@ -1,0 +1,27 @@
+{
+  "settings": {
+    "sound_enabled": true,
+    "animations_enabled": true,
+    "volume": 64
+  },
+  "high_scores": {
+    "snake": 65,
+    "tower_stacking": 200,
+    "puzzle_2048": 1500,
+    "word_search": 60,
+    "tic_tac_toe": 10,
+    "memory_match": 115,
+    "minesweeper": 500,
+    "connect4": 100,
+    "whack_a_mole": 240,
+    "spider_solitaire": 756,
+    "breakout": 500,
+    "reaction_time": 639,
+    "hangman": 85
+  },
+  "tutorials_seen": {
+    "solitaire": true,
+    "spider_solitaire": true,
+    "tower_stacking": true
+  }
+}

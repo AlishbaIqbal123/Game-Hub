@@ -1,0 +1,16 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1440" height="900" fill="#07111F"/>
+  <rect width="1440" height="900" fill="rgba(5,10,20,0.58)"/>
+  <rect x="480" y="200" width="480" height="500" rx="36" fill="#12233F" fill-opacity="0.94" stroke="rgba(255,255,255,0.14)"/>
+  <circle cx="860" cy="250" r="150" fill="#9D4DFF" fill-opacity="0.16"/>
+  <text x="560" y="292" fill="#F5F8FF" font-size="42" font-family="Bahnschrift" font-weight="700">Paused</text>
+  <text x="560" y="334" fill="#9AB0D5" font-size="18" font-family="Segoe UI">Take a breath, adjust settings, or jump back into the run.</text>
+  <rect x="560" y="390" width="320" height="60" rx="24" fill="#28F2FF"/>
+  <text x="670" y="428" fill="#07111F" font-size="18" font-family="Segoe UI" font-weight="700">Resume</text>
+  <rect x="560" y="472" width="320" height="60" rx="24" fill="#1B2B48" stroke="#4C8DFF"/>
+  <text x="671" y="510" fill="#F5F8FF" font-size="18" font-family="Segoe UI">Restart</text>
+  <rect x="560" y="554" width="320" height="60" rx="24" fill="#1B2B48" stroke="#9D4DFF"/>
+  <text x="667" y="592" fill="#F5F8FF" font-size="18" font-family="Segoe UI">Settings</text>
+  <rect x="560" y="636" width="320" height="60" rx="24" fill="rgba(255,107,107,0.14)" stroke="rgba(255,107,107,0.5)"/>
+  <text x="650" y="674" fill="#F5F8FF" font-size="18" font-family="Segoe UI">Return Home</text>
+</svg>

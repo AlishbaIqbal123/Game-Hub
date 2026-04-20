@@ -1,0 +1,38 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1440" height="900" fill="#07111F"/>
+  <rect x="40" y="36" width="1360" height="126" rx="30" fill="#12233F" fill-opacity="0.9" stroke="rgba(255,255,255,0.12)"/>
+  <text x="82" y="88" fill="#F5F8FF" font-size="34" font-family="Bahnschrift" font-weight="700">Snake</text>
+  <text x="82" y="124" fill="#9AB0D5" font-size="18" font-family="Segoe UI">Top score bar, game area, controls, and pause access.</text>
+  <rect x="880" y="66" width="128" height="52" rx="20" fill="#1B2B48" stroke="#28F2FF"/>
+  <text x="916" y="99" fill="#F5F8FF" font-size="16" font-family="Segoe UI">Score 55</text>
+  <rect x="1024" y="66" width="128" height="52" rx="20" fill="#1B2B48" stroke="#9D4DFF"/>
+  <text x="1062" y="99" fill="#F5F8FF" font-size="16" font-family="Segoe UI">Best 120</text>
+  <rect x="1168" y="66" width="92" height="52" rx="20" fill="#28F2FF"/>
+  <text x="1195" y="99" fill="#07111F" font-size="16" font-family="Segoe UI" font-weight="700">Pause</text>
+  <rect x="1276" y="66" width="88" height="52" rx="20" fill="#1B2B48" stroke="rgba(255,255,255,0.18)"/>
+  <text x="1304" y="99" fill="#F5F8FF" font-size="16" font-family="Segoe UI">Home</text>
+
+  <rect x="40" y="194" width="930" height="650" rx="34" fill="#12233F" fill-opacity="0.78" stroke="rgba(255,255,255,0.10)"/>
+  <rect x="96" y="248" width="818" height="538" rx="28" fill="#091224" stroke="#48F1A9" stroke-opacity="0.35"/>
+  <g opacity="0.75">
+    <rect x="128" y="280" width="62" height="62" rx="16" fill="#0F1D36"/>
+    <rect x="196" y="280" width="62" height="62" rx="16" fill="#132341"/>
+    <rect x="264" y="280" width="62" height="62" rx="16" fill="#0F1D36"/>
+    <rect x="332" y="280" width="62" height="62" rx="16" fill="#132341"/>
+  </g>
+  <rect x="470" y="454" width="32" height="32" rx="12" fill="#FF5CB8"/>
+  <rect x="538" y="454" width="32" height="32" rx="12" fill="#28F2FF"/>
+  <rect x="570" y="454" width="32" height="32" rx="12" fill="#48F1A9"/>
+
+  <rect x="1000" y="194" width="400" height="650" rx="34" fill="#12233F" fill-opacity="0.78" stroke="rgba(255,255,255,0.10)"/>
+  <text x="1036" y="248" fill="#F5F8FF" font-size="24" font-family="Bahnschrift">Controls</text>
+  <rect x="1036" y="278" width="328" height="88" rx="22" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.10)"/>
+  <text x="1064" y="326" fill="#9AB0D5" font-size="16" font-family="Segoe UI">Arrow keys move the snake. Keep the run alive.</text>
+  <rect x="1036" y="390" width="164" height="52" rx="20" fill="#28F2FF"/>
+  <text x="1086" y="423" fill="#07111F" font-size="16" font-family="Segoe UI" font-weight="700">Start Run</text>
+  <rect x="1212" y="390" width="152" height="52" rx="20" fill="#1B2B48" stroke="#4C8DFF"/>
+  <text x="1258" y="423" fill="#F5F8FF" font-size="16" font-family="Segoe UI">Reset</text>
+  <text x="1036" y="506" fill="#F5F8FF" font-size="22" font-family="Bahnschrift">Status</text>
+  <rect x="1036" y="528" width="328" height="72" rx="22" fill="rgba(255,255,255,0.06)"/>
+  <text x="1064" y="572" fill="#9AB0D5" font-size="16" font-family="Segoe UI">Collect fruit, avoid walls, avoid yourself.</text>
+</svg>

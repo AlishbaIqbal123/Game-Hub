@@ -1,0 +1,57 @@
+<svg width="1440" height="900" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1440" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#07111F"/>
+      <stop offset="1" stop-color="#141D38"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="320" y2="240" gradientUnits="userSpaceOnUse">
+      <stop stop-color="rgba(255,255,255,0.10)"/>
+      <stop offset="1" stop-color="rgba(255,255,255,0.05)"/>
+    </linearGradient>
+  </defs>
+  <rect width="1440" height="900" fill="url(#bg)"/>
+  <rect x="60" y="48" width="1320" height="180" rx="34" fill="#12233F" fill-opacity="0.88" stroke="rgba(255,255,255,0.14)"/>
+  <circle cx="1160" cy="94" r="150" fill="#28F2FF" fill-opacity="0.12"/>
+  <circle cx="1280" cy="122" r="180" fill="#9D4DFF" fill-opacity="0.14"/>
+  <text x="96" y="108" fill="#F5F8FF" font-size="42" font-family="Bahnschrift" font-weight="700">Neon Game Hub</text>
+  <text x="96" y="154" fill="#9AB0D5" font-size="18" font-family="Segoe UI">Futuristic multi-game launcher with smooth transitions, score tracking, and arcade-style polish.</text>
+  <rect x="96" y="182" width="180" height="40" rx="20" fill="#28F2FF"/>
+  <text x="132" y="208" fill="#07111F" font-size="16" font-family="Segoe UI" font-weight="700">6 Playable Games</text>
+  <rect x="304" y="182" width="250" height="40" rx="20" fill="#1B2B48" stroke="#9D4DFF"/>
+  <text x="336" y="208" fill="#F5F8FF" font-size="16" font-family="Segoe UI">Desktop + Mobile Layout</text>
+
+  <rect x="60" y="272" width="1320" height="580" rx="34" fill="rgba(255,255,255,0.03)" stroke="rgba(255,255,255,0.10)"/>
+  <g>
+    <rect x="96" y="310" width="392" height="220" rx="28" fill="#12233F" fill-opacity="0.82" stroke="#28F2FF" stroke-opacity="0.5"/>
+    <text x="128" y="366" fill="#F5F8FF" font-size="28" font-family="Bahnschrift">Tic Tac Toe</text>
+    <text x="128" y="408" fill="#9AB0D5" font-size="16" font-family="Segoe UI">Neon duel board with AI and clean score feedback.</text>
+    <text x="128" y="480" fill="#28F2FF" font-size="16" font-family="Segoe UI" font-weight="700">Open Game →</text>
+  </g>
+  <g>
+    <rect x="524" y="310" width="392" height="220" rx="28" fill="#12233F" fill-opacity="0.82" stroke="#9D4DFF" stroke-opacity="0.5"/>
+    <text x="556" y="366" fill="#F5F8FF" font-size="28" font-family="Bahnschrift">Ludo</text>
+    <text x="556" y="408" fill="#9AB0D5" font-size="16" font-family="Segoe UI">Basic local Ludo with neon board art and die controls.</text>
+    <text x="556" y="480" fill="#9D4DFF" font-size="16" font-family="Segoe UI" font-weight="700">Open Game →</text>
+  </g>
+  <g>
+    <rect x="952" y="310" width="392" height="220" rx="28" fill="#12233F" fill-opacity="0.82" stroke="#48F1A9" stroke-opacity="0.5"/>
+    <text x="984" y="366" fill="#F5F8FF" font-size="28" font-family="Bahnschrift">Snake</text>
+    <text x="984" y="408" fill="#9AB0D5" font-size="16" font-family="Segoe UI">Responsive arcade board with neon food and score bar.</text>
+    <text x="984" y="480" fill="#48F1A9" font-size="16" font-family="Segoe UI" font-weight="700">Open Game →</text>
+  </g>
+  <g>
+    <rect x="96" y="568" width="392" height="220" rx="28" fill="#12233F" fill-opacity="0.82" stroke="#4C8DFF" stroke-opacity="0.5"/>
+    <text x="128" y="624" fill="#F5F8FF" font-size="28" font-family="Bahnschrift">Word Search</text>
+    <text x="128" y="666" fill="#9AB0D5" font-size="16" font-family="Segoe UI">Grid-based word puzzle with highlighted selections.</text>
+  </g>
+  <g>
+    <rect x="524" y="568" width="392" height="220" rx="28" fill="#12233F" fill-opacity="0.82" stroke="#FF5CB8" stroke-opacity="0.5"/>
+    <text x="556" y="624" fill="#F5F8FF" font-size="28" font-family="Bahnschrift">Tower Stacking</text>
+    <text x="556" y="666" fill="#9AB0D5" font-size="16" font-family="Segoe UI">Timing-based stacker with moving blocks and depth.</text>
+  </g>
+  <g>
+    <rect x="952" y="568" width="392" height="220" rx="28" fill="#12233F" fill-opacity="0.82" stroke="#FFD166" stroke-opacity="0.5"/>
+    <text x="984" y="624" fill="#F5F8FF" font-size="28" font-family="Bahnschrift">2048 Puzzle</text>
+    <text x="984" y="666" fill="#9AB0D5" font-size="16" font-family="Segoe UI">Clean merge-grid with bold numeric tiles and responsive sizing.</text>
+  </g>
+</svg>
