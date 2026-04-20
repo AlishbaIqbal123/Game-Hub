@@ -140,7 +140,14 @@ class SolitaireScreen(BaseGameScreen):
         sub_hdr.addWidget(reset)
         self.content_layout.addLayout(sub_hdr)
 
-        self.board = SolitaireBoard(self); self.content_layout.addWidget(self.board, 1)
+        from PyQt6.QtWidgets import QScrollArea, QFrame
+        self.board = SolitaireBoard(self)
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+        scroll.setFrameShape(QFrame.Shape.NoFrame)
+        scroll.setStyleSheet("background: transparent;")
+        scroll.setWidget(self.board)
+        self.content_layout.addWidget(scroll, 1)
         self.reset_game()
         self.show_tutorial([
             {"emoji": "👑", "title": "Solitaire Legend", "body": "Stack cards in alternating colors and descending order (e.g., Red 9 on Black 10)."},

@@ -97,8 +97,14 @@ class TowerStackingScreen(BaseGameScreen):
         self.content_layout.addWidget(info)
 
         # ── Canvas ────────────────────────────────────────────────────────────
+        from PyQt6.QtWidgets import QScrollArea, QFrame
         self.canvas = TowerCanvas(self)
-        self.content_layout.addWidget(self.canvas, 1)
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+        scroll.setFrameShape(QFrame.Shape.NoFrame)
+        scroll.setStyleSheet("background: transparent;")
+        scroll.setWidget(self.canvas)
+        self.content_layout.addWidget(scroll, 1)
 
         # ── Bottom controls ───────────────────────────────────────────────────
         ctrl = QHBoxLayout()
