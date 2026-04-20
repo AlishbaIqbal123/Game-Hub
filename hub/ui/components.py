@@ -208,11 +208,23 @@ class GlassCard(QFrame):
 # ─────────────────────────────────────────────────────────────────────────────
 
 class NeonButton(QPushButton):
-    def __init__(self, text: str, primary: bool = False, danger: bool = False, parent=None) -> None:
+    def __init__(self, text: str, primary: bool = False, danger: bool = False, accent: str = None, parent=None) -> None:
         super().__init__(text, parent)
         if primary: self.setObjectName("PrimaryButton")
         elif danger: self.setObjectName("DangerButton")
         else: self.setObjectName("GhostButton")
+        
+        if accent:
+            self.setStyleSheet(f"""
+                QPushButton { {
+                    border: 1px solid {accent}55;
+                    color: {accent};
+                } }
+                QPushButton:hover { {
+                    background: {accent}22;
+                    border: 1px solid {accent};
+                } }
+            """)
         self.setCursor(Qt.CursorShape.PointingHandCursor)
 
 

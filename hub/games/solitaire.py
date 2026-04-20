@@ -87,7 +87,7 @@ class SolitaireBoard(QWidget):
 
     def paintEvent(self, e):
         p = QPainter(self); p.setRenderHint(QPainter.RenderHint.Antialiasing)
-        grad = QRadialGradient(QPointF(self.rect().center()), self.width()*0.7)
+        grad = QRadialGradient(self.width() / 2, self.height() / 2, self.width() * 0.8)
         grad.setColorAt(0, QColor("#12533E")); grad.setColorAt(1, QColor("#08241D"))
         p.fillRect(self.rect(), grad)
 
