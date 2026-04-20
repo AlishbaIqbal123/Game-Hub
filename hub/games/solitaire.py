@@ -200,6 +200,7 @@ class SolitaireScreen(BaseGameScreen):
         if not self.stock: self.stock = self.waste[::-1]; self.waste = []
         else: self.waste.append(self.stock.pop()); self.waste[-1].face_up = True
         self._moves += 1; self.sounds.play("click"); self._refresh()
+        self.storage.increment_stat("moves")
 
     def try_move(self, s_type, s_col, s_idx, d_type, d_col):
         src = []
@@ -229,4 +230,7 @@ class SolitaireScreen(BaseGameScreen):
             if d_type == "foundation": self.foundations[d_col].extend(src)
             else: self.tableau[d_col].extend(src)
             self._moves += 1; self.sounds.play("move"); self._refresh()
-            if sum(len(f) for f in self.foundations) == 52: self.show_game_over("🏆", "PATIENCE REWARDED", self._calc_score(), 0, "Victory!")
+            self.storage.increment_stat("moves")
+            if sum(len(f) for f in self.foundations) == 52: 
+                self.storage.increment_stat("wins")
+                self.show_game_over("🏆", "PATIENCE REWARDED", self._calc_score(), 0, "Victory!")

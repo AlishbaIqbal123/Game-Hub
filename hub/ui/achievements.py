@@ -29,34 +29,38 @@ class AchievementsScreen(QWidget):
         ht.addWidget(tag); ht.addWidget(title)
         hl.addLayout(ht); hl.addStretch(1)
 
-        hl.addWidget(StatChip("💎 12/48 Unlocked", PALETTE["secondary"]))
+        # Real Achievement Logic
+        moves_count = self.storage.get_stat("moves")
+        games_count = self.storage.get_stat("games_played")
+        wins_count  = self.storage.get_stat("wins")
+        
+        achievements = [
+            ("Arcade Rookie", f"Launch 10 different games. ({games_count}/10)", "🎮", min(100, int(games_count/10*100))),
+            ("Move Maestro", f"Perform 500 tactical moves. ({moves_count}/500)", "🖱️", min(100, int(moves_count/500*100))),
+            ("Grand Champion", f"Claim victory in 5 full matches. ({wins_count}/5)", "🏆", min(100, int(wins_count/5*100))),
+            ("Steady Hand", "Win your first Klondike match.", "👑", 100 if self.storage.high_score("solitaire") > 0 else 0),
+            ("Spider Slayer", "Clear your first Spider sequence.", "🕷️", 100 if self.storage.high_score("spider_solitaire") > 0 else 0),
+            ("Tower Zenith", "Reach 10 blocks in Tower Stacking.", "🏙️", min(100, int(self.storage.high_score("tower_stacking")/10*100))),
+        ]
+
+        unlocked = sum(1 for _, _, _, p in achievements if p == 100)
+        self._unlocked_chip = StatChip(f"💎 {unlocked}/{len(achievements)} Unlocked", PALETTE["secondary"])
+        hl.addWidget(self._unlocked_chip)
         main.addWidget(header)
         self._animated_widgets.append(header)
 
         # ── Content ───────────────────────────────────────────────────────────
         scroll = QScrollArea(); scroll.setWidgetResizable(True)
         scroll.setFrameShape(QFrame.Shape.NoFrame)
+        scroll.setStyleSheet("background: transparent;")
         
-        grid_w = QWidget(); grid = QGridLayout(grid_w)
+        grid_w = QWidget(); grid_w.setStyleSheet("background: transparent;")
+        grid = QGridLayout(grid_w)
         grid.setContentsMargins(0, 0, 10, 0); grid.setSpacing(24)
         for i in range(3): grid.setColumnStretch(i, 1)
 
-        # Mock Achievements
-        achievements = [
-            ("First Blood", "Win your first game in Snake.", "🐍", 100),
-            ("High Roller", "Reach a score of 2048 in Puzzle 2048.", "🧩", 65),
-            ("Unstoppable", "Reach Level 10 in any game.", "🔥", 30),
-            ("Strategist", "Win a game of Chess without losing a queen.", "♔", 0),
-            ("Lucky Strike", "Find 5 mines in a row in Minesweeper.", "💣", 80),
-            ("Word Smith", "Complete 100 words in Word Search.", "📝", 15),
-            ("Consistent", "Play for 7 days in a row.", "📅", 50),
-            ("Socialite", "Connect with 5 friends.", "👥", 10),
-            ("Developer's Pet", "Find the hidden Easter egg.", "🐰", 0),
-        ]
-
         for i, (name, desc, ico, prog) in enumerate(achievements):
-            card = QFrame(); card.setObjectName("Card")
-            card.setFixedHeight(220)
+            card = GlassCard(); card.setFixedHeight(220)
             cl = QVBoxLayout(card); cl.setContentsMargins(24, 24, 24, 24); cl.setSpacing(12)
             
             top = QHBoxLayout()
@@ -66,7 +70,7 @@ class AchievementsScreen(QWidget):
                 top.addWidget(StatChip("UNLOCKED", PALETTE["tertiary"]))
             cl.addLayout(top)
 
-            aname = QLabel(name); aname.setStyleSheet(f"font-weight: 800; font-size: 18px; color: {PALETTE['text'] if prog > 0 else PALETTE['muted']};")
+            aname = QLabel(name); aname.setStyleSheet(f"font-weight: 800; font-size: 18px; color: {PALETTE['primary'] if prog > 0 else PALETTE['muted']};")
             cl.addWidget(aname)
             
             adesc = QLabel(desc); adesc.setObjectName("MutedLabel"); adesc.setWordWrap(True)
@@ -76,7 +80,7 @@ class AchievementsScreen(QWidget):
             pb = QProgressBar(); pb.setFixedHeight(6); pb.setValue(prog)
             pb.setTextVisible(False)
             pb.setStyleSheet(f"QProgressBar {{ background: {PALETTE['surface_low']}; border-radius: 3px; border: none; }} "
-                            f"QProgressBar::chunk {{ background: {PALETTE['secondary'] if prog < 100 else PALETTE['tertiary']}; border-radius: 3px; }}")
+                             f"QProgressBar::chunk {{ background: {PALETTE['secondary'] if prog < 100 else PALETTE['tertiary']}; border-radius: 3px; }}")
             cl.addWidget(pb)
             
             grid.addWidget(card, i // 3, i % 3)

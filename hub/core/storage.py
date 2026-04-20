@@ -18,6 +18,11 @@ class StorageManager:
                 "volume": 60,
             },
             "high_scores": {},
+            "lifetime_stats": {
+                "moves": 0,
+                "games_played": 0,
+                "wins": 0
+            }
         }
         self._load()
 
@@ -30,9 +35,19 @@ class StorageManager:
                     self.state["settings"].update(data["settings"])
                 if "high_scores" in data and isinstance(data["high_scores"], dict):
                     self.state["high_scores"].update(data["high_scores"])
+                if "lifetime_stats" in data and isinstance(data["lifetime_stats"], dict):
+                    self.state["lifetime_stats"].update(data["lifetime_stats"])
             except (json.JSONDecodeError, ValueError):
-                # Corrupted file — keep defaults and overwrite on next save
                 pass
+
+    def increment_stat(self, key: str, amount: int = 1) -> None:
+        if "lifetime_stats" not in self.state:
+            self.state["lifetime_stats"] = {"moves": 0, "games_played": 0, "wins": 0}
+        self.state["lifetime_stats"][key] = self.state["lifetime_stats"].get(key, 0) + amount
+        self.save()
+
+    def get_stat(self, key: str) -> int:
+        return self.state.get("lifetime_stats", {}).get(key, 0)
 
     def save(self) -> None:
         self.path.write_text(json.dumps(self.state, indent=2), encoding="utf-8")

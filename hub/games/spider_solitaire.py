@@ -289,7 +289,7 @@ class SpiderScreen(BaseGameScreen):
         
         self.tableau[dst_col].extend(moving); del self.tableau[src_col][src_idx:]
         if self.tableau[src_col]: self.tableau[src_col][-1].face_up = True
-        self._moves += 1; self.sounds.play("move")
+        self._moves += 1; self.sounds.play("move"); self.storage.increment_stat("moves")
         self._check_complete(dst_col); self._refresh()
 
     def _check_complete(self, col):
@@ -309,7 +309,9 @@ class SpiderScreen(BaseGameScreen):
         del self.tableau[col][-13:]
         if self.tableau[col]: self.tableau[col][-1].face_up = True
         self.completed += 1; self.sounds.play("success")
-        if self.completed == 8: self.show_game_over("🏆", "SPIDER MASTER", 5000, 0, "All 8 sequences completed!")
+        if self.completed == 8: 
+            self.storage.increment_stat("wins")
+            self.show_game_over("🏆", "SPIDER MASTER", 5000, 0, "All 8 sequences completed!")
         self._refresh()
 
     def deal_stock(self):
@@ -328,4 +330,4 @@ class SpiderScreen(BaseGameScreen):
                 'origin': origin, 'current': origin, 'target': target,
                 'card': c, 'col': col, 'start_time': t_base + col*0.06
             })
-        self._moves += 1; self.sounds.play("click"); self._refresh()
+        self._moves += 1; self.sounds.play("click"); self.storage.increment_stat("moves"); self._refresh()

@@ -20,6 +20,7 @@
     "hangman": 85
   },
   "tutorials_seen": {
+    "solitaire": true,
     "spider_solitaire": true
   }
 }

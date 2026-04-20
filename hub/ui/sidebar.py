@@ -17,8 +17,7 @@ from hub.core.theme import PALETTE, is_dark, set_dark_mode, FONT_TITLE, FONT_BOD
 # ── Nav item data ─────────────────────────────────────────────────────────────
 NAV_ITEMS = [
     ("home",         "✸", "Home"),
-    ("games",        "✦", "Experiences"),
-    ("leaderboard",  "★", "Global Ranks"),
+    ("games",        "✦", "Discovery"),
     ("achievements", "❂", "Milestones"),
     ("settings",     "⚙", "System"),
 ]

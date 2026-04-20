@@ -19,6 +19,7 @@ class BaseGameScreen(QWidget):
         self.accent   = accent
         self.storage  = storage
         self.sounds   = sounds
+        self.storage.increment_stat("games_played")
         self._animated_widgets: list[QWidget] = []
 
         # Pause dialog

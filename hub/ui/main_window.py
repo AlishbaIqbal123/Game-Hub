@@ -6,8 +6,8 @@ from hub.core.storage import StorageManager
 from hub.core.theme import app_stylesheet, set_dark_mode
 from hub.games.registry import build_registry
 from hub.ui.dashboard import DashboardScreen
+from hub.ui.discovery import DiscoveryScreen
 from hub.ui.settings import SettingsScreen
-from hub.ui.leaderboard import LeaderboardScreen
 from hub.ui.achievements import AchievementsScreen
 from hub.ui.help import HelpScreen
 from hub.ui.sidebar import Sidebar
@@ -59,20 +59,22 @@ class MainWindow(QMainWindow):
         self.settings_screen.go_home.connect(lambda: self._on_navigate("home"))
         self.settings_screen.settings_changed.connect(self._on_settings_changed)
 
-        self.leaderboard = LeaderboardScreen(self.registry, self.storage)
+        self.discovery_screen = DiscoveryScreen(self.registry, self.storage)
+        self.discovery_screen.open_game.connect(self._launch_game)
+        
         self.achievements = AchievementsScreen(self.registry, self.storage)
         self.help_screen = HelpScreen()
 
         self.screens: dict[str, QWidget] = {
             "home":         self.dashboard,
+            "games":        self.discovery_screen,
             "settings":     self.settings_screen,
-            "leaderboard":  self.leaderboard,
             "achievements": self.achievements,
             "help":         self.help_screen,
         }
         
         # Add core screens to stack
-        for key in ["home", "settings", "leaderboard", "achievements", "help"]:
+        for key in ["home", "games", "settings", "achievements", "help"]:
             self.stack.addWidget(self.screens[key])
 
         # Build game screens
@@ -87,15 +89,13 @@ class MainWindow(QMainWindow):
 
     def _on_navigate(self, key: str, animate: bool = True) -> None:
         # Map specialized sidebar keys to screen keys
-        screen_key = {
-            "games": "home", # 'Games' tab in sidebar leads to library on dashboard
-        }.get(key, key)
+        screen_key = key
 
         if screen_key not in self.screens:
             return
 
         # Show/Hide sidebar based on screen type
-        main_menus = ["home", "settings", "leaderboard", "achievements", "help"]
+        main_menus = ["home", "games", "settings", "achievements", "help"]
         is_main = screen_key in main_menus
         self.sidebar.setVisible(is_main)
 
